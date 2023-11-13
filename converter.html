@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="converter-container">
+        <label for="temperature">Enter Temperature:</label>
+        <input type="text" id="temperature" placeholder="Enter temperature" />
+
+        <label for="unit">Select Unit:</label>
+        <select id="unit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <button onclick="convertTemperature()">Convert</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const inputTemperature = document.getElementById("temperature").value;
+            const selectedUnit = document.getElementById("unit").value;
+            const resultArea = document.getElementById("result");
+
+          
+            if (isNaN(inputTemperature)) {
+                resultArea.textContent = "Please enter a valid number for temperature.";
+                return;
+            }
+
+            let convertedTemperature;
+            switch (selectedUnit) {
+                case "celsius":
+                    convertedTemperature = (parseFloat(inputTemperature) - 32) * (5/9);
+                    break;
+                case "fahrenheit":
+                    convertedTemperature = (parseFloat(inputTemperature) * (9/5)) + 32;
+                    break;
+                case "kelvin":
+                    convertedTemperature = parseFloat(inputTemperature) + 273.15;
+                    break;
+                default:
+                    resultArea.textContent = "Invalid unit selected.";
+                    return;
+            }
+
+            resultArea.textContent = `Converted Temperature: ${convertedTemperature.toFixed(2)} ${selectedUnit.toUpperCase()}`;
+        }
+    </script>
+
+</body>
+</html>
